@@ -146,7 +146,6 @@ public class Surface
          }
             
          visibleSurfaces++;
-         //drawOrder[visibleSurfaces - 1] = null;
          for (int i = visibleSurfaces - 1;(i > insertIndex) && (i > 0); i--) {
             drawOrder[i] = drawOrder[i - 1];
          }
