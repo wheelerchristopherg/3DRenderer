@@ -118,7 +118,7 @@ public class Surface
          }
          
          //determines where to place the surface in the draw stack.
-         if (visibleSurfaces > 0) {
+         //if (visibleSurfaces > 0) {
             if (drawOrder.length < visibleSurfaces + 1) {
                Surface[] temp = drawOrder;
                drawOrder = new Surface[visibleSurfaces + 50];
@@ -151,19 +151,17 @@ public class Surface
             }
             
             visibleSurfaces++;
-            Surface[] temp = drawOrder.clone();
-            
-            drawOrder[insertIndex] = this;
-            
+            //Surface[] temp = drawOrder.clone();
             for (int i = insertIndex + 1; i < visibleSurfaces; i++) {
-               drawOrder[i] = temp[i - 1];
+               drawOrder[i] = drawOrder[i - 1];
             }
+            drawOrder[insertIndex] = this;
          } 
-         else {
+         /*else {
             drawOrder = new Surface[50];
             visibleSurfaces++;
             drawOrder[0] = this;
-         }
+         }*/
       }
    }
    
@@ -224,7 +222,7 @@ public class Surface
       g.drawImage(bufferedImage, null, 0, 0);
       
       visibleSurfaces = 0;
-      drawOrder = new Surface[50];
+      //drawOrder = new Surface[50];
    }
    
    public void draw(Graphics2D g) {
