@@ -118,26 +118,20 @@ public class Surface
          }
          
          //determines where to place the surface in the draw stack.
-         //if (visibleSurfaces > 0) {
-            if (drawOrder.length < visibleSurfaces + 1) {
-               Surface[] temp = drawOrder;
-               drawOrder = new Surface[visibleSurfaces + 50];
-               for (int i = 0; i < visibleSurfaces; i++) {
-                  drawOrder[i] = temp[i];
-               }
-            }
-            
-            /* int insertIndex = visibleSurfaces;
+         if (drawOrder.length < visibleSurfaces + 1) {
+            Surface[] temp = drawOrder;
+            drawOrder = new Surface[visibleSurfaces + 50];
             for (int i = 0; i < visibleSurfaces; i++) {
-                if (depth < drawOrder[i].getDepth()) {
-                    insertIndex = i;
-                    break;
-                }
-            } */
-            
-            int left = 0;
-            int right = visibleSurfaces - 1;
-            int insertIndex = left + ((right - left) / 2);
+               drawOrder[i] = temp[i];
+            }
+            //System.out.println("Expand array: " + drawOrder.length);
+         }
+         
+         int left = 0;
+         int right = visibleSurfaces - 1;
+         int insertIndex = 0;
+         if (right > left) {
+            insertIndex = left + ((right - left) / 2);
             double otherDepth = drawOrder[insertIndex].getDepth();
             while ((otherDepth != depth) && (left != right)) {
                if (depth < otherDepth) {
@@ -149,19 +143,14 @@ public class Surface
                insertIndex = left + ((right - left) / 2);
                otherDepth = drawOrder[insertIndex].getDepth();
             }
+         }
             
-            visibleSurfaces++;
-            //Surface[] temp = drawOrder.clone();
-            for (int i = insertIndex + 1; i < visibleSurfaces; i++) {
-               drawOrder[i] = drawOrder[i - 1];
-            }
-            drawOrder[insertIndex] = this;
-         } 
-         /*else {
-            drawOrder = new Surface[50];
-            visibleSurfaces++;
-            drawOrder[0] = this;
-         }*/
+         visibleSurfaces++;
+         //drawOrder[visibleSurfaces - 1] = null;
+         for (int i = visibleSurfaces - 1;(i > insertIndex) && (i > 0); i--) {
+            drawOrder[i] = drawOrder[i - 1];
+         }
+         drawOrder[insertIndex] = this;
       }
    }
    
@@ -222,7 +211,6 @@ public class Surface
       g.drawImage(bufferedImage, null, 0, 0);
       
       visibleSurfaces = 0;
-      //drawOrder = new Surface[50];
    }
    
    public void draw(Graphics2D g) {
