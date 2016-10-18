@@ -114,7 +114,7 @@ public class Vector
    */
    public double[] toArray() {
       double[] array = {x, y, z};
-      return array.clone();
+      return array;
    }
    
    /**
@@ -129,8 +129,8 @@ public class Vector
        Returns the magnitude of the current vector.
        @return double magnitude
    */
-   public double magnitude(){
-      return Math.sqrt((x*x)+(y*y)+(z*z));
+   public double magnitude() {
+      return Math.sqrt((x * x) + (y * y) + (z * z));
    }
    
    /**
@@ -138,8 +138,8 @@ public class Vector
        @param a vector to add to current vector
        @return Vector sum
    */
-   public Vector add(Vector a){
-      return new Vector(x+a.getXD(),y+a.getYD(),z+a.getZD());
+   public Vector add(Vector a) {
+      return new Vector(x + a.x, y + a.y, z + a.z);
    }
    
    /**
@@ -147,8 +147,8 @@ public class Vector
        @param a vector to subtract
        @return Vector current vector - a
    */
-   public Vector subtract(Vector a){
-      return new Vector(x-a.getXD(),y-a.getYD(),z-a.getZD());
+   public Vector subtract(Vector a) {
+      return new Vector(x - a.x, y - a.y, z - a.z);
    }
    
    /**
@@ -156,8 +156,8 @@ public class Vector
        @param scalar double
        @return Vector scaled vector 
    */
-   public Vector scale(double scalar){
-      return new Vector(x*scalar,y*scalar,z*scalar);
+   public Vector scale(double scalar) {
+      return new Vector(x * scalar, y * scalar, z * scalar);
    }
    
    /**
@@ -166,7 +166,7 @@ public class Vector
        @return double dot product
    */
    public double dot(Vector a){
-      return (x * a.getXD()) + (y * a.getYD()) + (z * a.getZD());
+      return (x * a.x) + (y * a.y) + (z * a.z);
    }
    
    /**
@@ -184,7 +184,7 @@ public class Vector
        @return Vector cross product
    */
    public Vector cross(Vector b){
-      return new Vector((y*b.getZD())-(z*b.getYD()),(z*b.getXD())-(x*b.getZD()),(x*b.getYD())-(y*b.getXD()));
+      return new Vector((y * b.z) - (z * b.y), (z * b.x) - (x * b.z), (x * b.y) - (y * b.x));
    }
    
    /**
@@ -193,9 +193,9 @@ public class Vector
        @param input Vector to copy values from
    */
    public void setFromVector(Vector input) {
-      x = input.getXD();
-      y = input.getYD();
-      z = input.getZD();
+      x = input.x;
+      y = input.y;
+      z = input.z;
    }
    
    /**
@@ -204,7 +204,7 @@ public class Vector
        @return true when equal, false otherwise
    */
    public boolean equals(Vector v) {
-      if (x == v.getXD() && y == v.getYD() && z == v.getZD()) {
+      if ((x == v.x) && (y == v.y) && (z == v.z)) {
          return true;
       }
       return false;

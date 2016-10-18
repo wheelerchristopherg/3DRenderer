@@ -132,7 +132,7 @@ public class Surface
          int insertIndex = 0;
          if (right > left) {
             insertIndex = left + ((right - left) / 2);
-            double otherDepth = drawOrder[insertIndex].getDepth();
+            double otherDepth = drawOrder[insertIndex].depth;
             while ((otherDepth != depth) && (left != right)) {
                if (depth < otherDepth) {
                   right = (insertIndex - 1 >= left) ? insertIndex - 1 : left;
@@ -141,7 +141,7 @@ public class Surface
                   left = (insertIndex + 1 <= right) ? insertIndex + 1 : right;
                }
                insertIndex = left + ((right - left) / 2);
-               otherDepth = drawOrder[insertIndex].getDepth();
+               otherDepth = drawOrder[insertIndex].depth;
             }
          }
             
@@ -266,10 +266,6 @@ public class Surface
       //System.out.println("visibility: " + (System.nanoTime() - time));
       
       return visible;
-   }
-   
-   public double getDepth() {
-      return depth;
    }
    
 }
