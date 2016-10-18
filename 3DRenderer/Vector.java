@@ -204,9 +204,6 @@ public class Vector
        @return true when equal, false otherwise
    */
    public boolean equals(Vector v) {
-      if ((x == v.x) && (y == v.y) && (z == v.z)) {
-         return true;
-      }
-      return false;
+      return ((x == v.x) && (y == v.y) && (z == v.z));
    }
 }
