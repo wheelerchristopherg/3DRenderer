@@ -9,14 +9,14 @@ public class Matrix3x3
    
    /**
        Creates a 3x3 matrix out of 3 vectors using each vector as a columb.
-       @param columb1 Vector
-       @param columb2 Vector
-       @param columb3 Vector
+       @param column1 Vector
+       @param column2 Vector
+       @param column3 Vector
    */
-   public Matrix3x3(Vector columb1, Vector columb2, Vector columb3) {
-      matrix[0] = columb1.toArray();
-      matrix[1] = columb2.toArray();
-      matrix[2] = columb3.toArray();
+   public Matrix3x3(Vector column1, Vector column2, Vector column3) {
+      matrix[0] = column1.toArray();
+      matrix[1] = column2.toArray();
+      matrix[2] = column3.toArray();
    }
    
    public Matrix3x3(double[][] matrixArray) throws IllegalArgumentException {
@@ -78,15 +78,15 @@ public class Matrix3x3
    public Matrix3x3 invert() {
       Matrix3x3 inverted = new Matrix3x3();
       
-      inverted.editElement(0, 0, determinant2x2(matrix[1][1], matrix[1][2], matrix[2][1], matrix[2][2]));
-      inverted.editElement(0, 1, determinant2x2(matrix[0][2], matrix[0][1], matrix[2][2], matrix[2][1]));
-      inverted.editElement(0, 2, determinant2x2(matrix[0][1], matrix[0][2], matrix[1][1], matrix[1][2]));
-      inverted.editElement(1, 0, determinant2x2(matrix[1][2], matrix[1][0], matrix[2][2], matrix[2][0]));
-      inverted.editElement(1, 1, determinant2x2(matrix[0][0], matrix[0][2], matrix[2][0], matrix[2][2]));
-      inverted.editElement(1, 2, determinant2x2(matrix[0][2], matrix[0][0], matrix[1][2], matrix[1][0]));
-      inverted.editElement(2, 0, determinant2x2(matrix[1][0], matrix[1][1], matrix[2][0], matrix[2][1]));
-      inverted.editElement(2, 1, determinant2x2(matrix[0][1], matrix[0][0], matrix[2][1], matrix[2][0]));
-      inverted.editElement(2, 2, determinant2x2(matrix[0][0], matrix[0][1], matrix[1][0], matrix[1][1]));
+      inverted.matrix[0][0] = determinant2x2(matrix[1][1], matrix[1][2], matrix[2][1], matrix[2][2]);
+      inverted.matrix[0][1] = determinant2x2(matrix[0][2], matrix[0][1], matrix[2][2], matrix[2][1]);
+      inverted.matrix[0][2] = determinant2x2(matrix[0][1], matrix[0][2], matrix[1][1], matrix[1][2]);
+      inverted.matrix[1][0] = determinant2x2(matrix[1][2], matrix[1][0], matrix[2][2], matrix[2][0]);
+      inverted.matrix[1][1] = determinant2x2(matrix[0][0], matrix[0][2], matrix[2][0], matrix[2][2]);
+      inverted.matrix[1][2] = determinant2x2(matrix[0][2], matrix[0][0], matrix[1][2], matrix[1][0]);
+      inverted.matrix[2][0] = determinant2x2(matrix[1][0], matrix[1][1], matrix[2][0], matrix[2][1]);
+      inverted.matrix[2][1] = determinant2x2(matrix[0][1], matrix[0][0], matrix[2][1], matrix[2][0]);
+      inverted.matrix[2][2] = determinant2x2(matrix[0][0], matrix[0][1], matrix[1][0], matrix[1][1]);
       
       try {
          inverted = inverted.scale(1 / getDeterminate());
@@ -104,20 +104,13 @@ public class Matrix3x3
    
    public Matrix3x3 getTranspose() {
       Matrix3x3 transpose = this.clone();
-      try {
-         for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-               if (i != j) {
-                  transpose.editElement(i, j, getElement(j, i));
-               }
+      
+      for (int i = 0; i < 3; i++) {
+         for (int j = 0; j < 3; j++) {
+            if (i != j) {
+               transpose.matrix[i][j] = matrix[j][i];
             }
          }
-      }
-      catch (IllegalArgumentException e) {
-         System.out.println(e);
-      }
-      catch (NullPointerException e) {
-         System.out.println(e);
       }
       
       return transpose;
@@ -147,7 +140,7 @@ public class Matrix3x3
       Matrix3x3 output = clone();
       for (int i = 0; i < 3; i++) {
          for (int j = 0; j < 3; j++) {
-            output.editElement(i, j, matrix[i][j] * scalar);
+            output.matrix[i][j] = matrix[i][j] * scalar;
          }
       }
       
@@ -170,7 +163,7 @@ public class Matrix3x3
       Matrix3x3 output = new Matrix3x3();
       for (int i = 0; i < 3; i++) {
          for (int j = 0; j < 3; j++) {
-            output.editElement(i, j, matrix[i][0] * m.getElement(0, j) + matrix[i][1] * m.getElement(1, j) + matrix[i][2] * m.getElement(2, j));
+            output.matrix[i][j] = matrix[i][0] * m.matrix[0][j] + matrix[i][1] * m.matrix[1][j] + matrix[i][2] * m.matrix[2][j];
          }
       }
       
