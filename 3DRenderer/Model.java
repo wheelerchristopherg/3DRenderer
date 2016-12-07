@@ -313,14 +313,16 @@ public class Model
       }
       
       public Matrix3x3 getRotation() {
-         if (type == RotationType.X) {
+         if (type == X) {
             return Matrix3x3.rotateX(angle);
          } 
-         else if (type == RotationType.Y) {
+         else if (type == Y) {
             return Matrix3x3.rotateY(angle);
          } 
-         else {
+         else if (type == Z) {
             return Matrix3x3.rotateZ(angle);
+         } else {
+            return null;
          }
       }
       

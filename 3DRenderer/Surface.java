@@ -24,7 +24,7 @@ public class Surface
    private static Surface[] drawOrder = new Surface[50];
    private static boolean wireframe = false;
    private static int visibleSurfaces = 0;
-   private static Vector[] lightSource = new Vector[1];
+   private static Vector[] lightSource = new Vector[0];
    private static Camera cam = null;
    private static int numbLights = 0;
    
