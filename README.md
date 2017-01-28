@@ -1,7 +1,6 @@
 # 3DRenderer
 
-Video:
-    https://www.youtube.com/watch?v=QO3X2LiHbxI&feature=youtu.be
+Video: https://www.youtube.com/watch?v=QO3X2LiHbxI&feature=youtu.be
 
 How to run:
    1. Download files, mimicking file structure.
