@@ -30,7 +30,7 @@ public class CanvasPanel extends JPanel implements ActionListener
       
       setBackground(Color.BLACK);
       
-      fps = 1000;
+      fps = 100000;
       maxFps = 0;
       minFps = fps;
       
